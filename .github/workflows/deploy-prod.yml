@@ -25,9 +25,11 @@ jobs:
     steps:
       - run: |
           echo "Hey this is the env name retrieved from the environment secrets:"
-          echo "Value $env_name"
+          echo "Secret Value: '$env_name'"
+          echo "Other variable: '$env_other'"
         env:
-          env_name: ${{env.ENV_NAME}}
+          env_name: ${{secrets.ENV_NAME}}  #This will not get printed out
+          env_other: "I-am-not-a-secret"
       - uses: actions/checkout@v1
       - name: npm install and build webpack
         run: |
