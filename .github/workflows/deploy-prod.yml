@@ -27,6 +27,13 @@ jobs:
           echo "Hey this is the env name retrieved from the environment secrets:"
           echo "Secret Value: '$env_name'"
           echo "Other variable: '$env_other'"
+          echo "This workflow is: $GITHUB_WORKFLOW"
+          echo "This workflow run ID is: $GITHUB_RUN_ID"
+          echo "$GITHUB_ACTOR is the one who kicked this off"
+          echo "Below is the event that kicked off the workflow"
+          cat -n $GITHUB_EVENT_PATH
+          echo "The url for this run is:"
+          echo "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
         env:
           env_name: ${{secrets.ENV_NAME}}  #This will not get printed out
           env_other: "I-am-not-a-secret"
