@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - run: |
+          echo "Hey this is the env name retrieved from the environment secrets:"
+          echo $ENV_NAME
       - uses: actions/checkout@v1
       - name: npm install and build webpack
         run: |
