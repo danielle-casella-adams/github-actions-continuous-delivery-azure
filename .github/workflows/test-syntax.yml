@@ -19,7 +19,9 @@ env:
 jobs:
   kickoff-packer:
     runs-on: [ubuntu-latest]
-
+    defaults:
+      run:
+        shell: bash
     steps:
       - name: Write out RGRP
         run: echo $RGRP
