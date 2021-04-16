@@ -17,7 +17,7 @@ env:
 
 jobs:
   kickoff-packer:
-    runs-on: [linux]
+    runs-on: [ubuntu-latest]
 
     steps:
       - name: Write out RGRP
