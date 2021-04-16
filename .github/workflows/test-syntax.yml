@@ -1,6 +1,7 @@
 name: Generate Linux Action Runner Image Workflow
 
 on:
+  push:
   workflow_dispatch:
     inputs:
       environment:
