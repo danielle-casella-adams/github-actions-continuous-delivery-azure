@@ -1,0 +1,36 @@
+name: Generate Linux Action Runner Image Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment: D or P'
+        required: true
+        default: 'D'
+      region:
+        description: 'Region: NA26 or NA27'
+        required: true
+        default: 'NA26'
+
+env:
+  RGRP: ${{ format('BDAIM-{0}-{1}-GitHubServices-RGRP', github.event.inputs.environment, github.event.inputs.region) }}
+
+jobs:
+  kickoff-packer:
+    runs-on: [linux]
+
+    steps:
+      - name: Write out RGRP
+        run: echo $RGRP
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Verify working directory
+        run: pwd && ls
+
+      - name: Show Packer Version
+        run: echo "Packer Version $(packer --version)"
+
+      - name: Validate Packer
+        run: packer validate -syntax-only ./images/linux/ubuntu2004.json       
