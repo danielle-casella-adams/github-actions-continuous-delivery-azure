@@ -25,7 +25,7 @@ jobs:
         run: echo $RGRP
 
       - name: Make a new var
-        shell: powershell
+        shell: pwsh
         run: |
           $newPass = New-Guid
           echo "INSTALL_PASSWORD=$newPass" >> $GITHUB_ENV
