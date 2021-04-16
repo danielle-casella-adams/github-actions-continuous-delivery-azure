@@ -24,11 +24,10 @@ jobs:
       - name: Write out RGRP
         run: echo $RGRP
 
-      - name: Make a new var
-        shell: pwsh
+      - name: Create Install INSTALL_PASSWORD
         run: |
-          $newPass = New-Guid
-          Write-Output "::set-env name=INSTALL_PASSWORD::$newPass"
+          echo 'INSTALL_PASSWORD=$(openssl rand -base64 12)' >> $GITHUB_ENV
+          
       - name: Use env var
         run: |
           echo $INSTALL_PASSWORD
