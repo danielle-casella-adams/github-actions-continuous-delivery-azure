@@ -19,18 +19,16 @@ env:
 jobs:
   kickoff-packer:
     runs-on: [ubuntu-latest]
-    defaults:
-      run:
-        shell: bash
+        
     steps:
       - name: Write out RGRP
         run: echo $RGRP
 
       - name: Make a new var
+        shell: powershell
         run: |
-          echo pass=uuidgen
-          echo 'INSTALL_PASSWORD=$pass' >> $GITHUB_ENV
-      
+          $newPass = New-Guid
+          echo "INSTALL_PASSWORD=$newPass" >> $GITHUB_ENV
       - name: Use env var
         run: |
           echo $INSTALL_PASSWORD
