@@ -25,7 +25,8 @@ jobs:
 
       - name: Make a new var
         run: |
-          echo 'INSTALL_PASSWORD=$(uuidgen)' >> $GITHUB_ENV
+          echo pass=uuidgen
+          echo 'INSTALL_PASSWORD=$pass' >> $GITHUB_ENV
       
       - name: Use env var
         run: |
