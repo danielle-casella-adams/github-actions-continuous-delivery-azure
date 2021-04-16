@@ -23,6 +23,14 @@ jobs:
       - name: Write out RGRP
         run: echo $RGRP
 
+      - name: Make a new var
+        run: |
+          echo "action_state=yellow" >> $GITHUB_ENV
+      
+      - name: Use env var
+        run: |
+          echo $action_state
+          
       - name: Checkout Repository
         uses: actions/checkout@v2
 
