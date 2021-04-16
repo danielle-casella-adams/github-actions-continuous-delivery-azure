@@ -26,7 +26,8 @@ jobs:
 
       - name: Create Install INSTALL_PASSWORD
         run: |
-          echo 'INSTALL_PASSWORD=$(openssl rand -base64 12)' >> $GITHUB_ENV
+          pass=$(date +%s | sha256sum | base64 | head -c 32)
+          echo "INSTALL_PASSWORD=${pass}" >> $GITHUB_ENV
           
       - name: Use env var
         run: |
