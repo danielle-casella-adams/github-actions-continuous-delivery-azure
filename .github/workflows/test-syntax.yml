@@ -28,7 +28,7 @@ jobs:
         shell: pwsh
         run: |
           $newPass = New-Guid
-          echo "INSTALL_PASSWORD=$newPass" >> $GITHUB_ENV
+          Write-Output "::set-env name=INSTALL_PASSWORD::$newPass"
       - name: Use env var
         run: |
           echo $INSTALL_PASSWORD
