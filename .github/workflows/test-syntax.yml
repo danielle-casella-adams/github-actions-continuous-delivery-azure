@@ -52,7 +52,7 @@ jobs:
           teamsBody=${teamsBody//<%GITHUB_RUN_NUMBER%>/$GITHUB_RUN_NUMBER } 
           echo $teamsBody
           
-          curl -X POST -d $teamsBody {{ secrets.TEAMS_URL }}
+          curl -X POST -d "$teamsBody" {{ secrets.TEAMS_URL }}
         env:
           BUILD_STATUS: ${{ job.status }}
           
