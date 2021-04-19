@@ -51,6 +51,8 @@ jobs:
           teamsBody=${teamsBody//<%GITHUB_WORKFLOW%>/$GITHUB_WORKFLOW } 
           teamsBody=${teamsBody//<%GITHUB_RUN_NUMBER%>/$GITHUB_RUN_NUMBER } 
           echo $teamsBody
+          
+          curl -X POST -d $teamsBody {{ secrets.TEAMS_URL }}
         env:
           BUILD_STATUS: ${{ job.status }}
           
