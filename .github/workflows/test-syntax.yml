@@ -42,5 +42,17 @@ jobs:
       - name: Show Packer Version
         run: echo "Packer Version $(packer --version)"
 
-      - name: Validate Packer
-        run: packer validate -syntax-only ./images/linux/ubuntu2004.json       
+      - name: Post to Teams
+        run: |
+          currentDate=$(printf '%(%Y-%m-%d)T\n' -1)
+          teamsBody=$(jq . teams.json)
+          teamsBody=${teamsBody//<%BUILD_STATUS%>/$BUILD_STATUS } 
+          teamsBody=${teamsBody//<%DATE%>/$currentDate } 
+          teamsBody=${teamsBody//<%GITHUB_WORKFLOW%>/$GITHUB_WORKFLOW } 
+          teamsBody=${teamsBody//<%GITHUB_RUN_NUMBER%>/$GITHUB_RUN_NUMBER } 
+          echo $teamsBody
+        env:
+          BUILD_STATUS: ${{ job.status }}
+          
+          
+          
