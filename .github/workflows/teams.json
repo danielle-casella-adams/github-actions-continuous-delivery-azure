@@ -1,0 +1,46 @@
+{
+	"@type": "MessageCard",
+	"@context": "https://schema.org/extensions",
+	"themeColor": "0078D7",
+	"title": "Windows Actions Runner Build Status",
+	"sections": [
+		{
+			"activityTitle": "Build <%BUILD_STATUS%>",
+			"activitySubtitle": "<%DATE%>",
+			
+			"facts": [
+				{
+					"name": "Workflow:",
+					"value": "<%GITHUB_WORKFLOW%>"
+				},
+				{
+					"name": "Run #:",
+					"value": "<%GITHUB_RUN_NUMBER%>"
+				}
+			],
+			"text": "There is a problem with Push notifications, they don't seem to be picked up by the connector."
+		}
+	],
+	"potentialAction": [
+                {
+                    "@type": "OpenUri",
+                    "name": "View Build Log",
+                    "targets": [
+                        {
+                            "os": "default",
+                            "uri": "https://github.com/bdaim-bc-swat/virtual-environments/runs/<%BUILD_NUMBER>?check_suite-focus=true"
+                        }
+                    ]
+                },
+                {
+                    "@type": "OpenUri",
+                    "name": "View Installed Software",
+                    "targets": [
+                        {
+                            "os": "default",
+                            "uri": "https://github.com/bdaim-bc-swat/virtual-environments/blob/main/images/win/Windows2019-Readme.md"
+                        }
+                    ]
+                }
+	]
+}
