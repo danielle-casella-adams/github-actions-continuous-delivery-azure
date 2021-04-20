@@ -46,14 +46,15 @@ jobs:
         run: |
           echo "'$BUILD_STATUS' '$GITHUB_WORKFLOW' '$GITHUB_RUN_NUMBER' '$GITHUB_REPOSITORY' '$GITHUB_RUN_ID' '$BUILD_URL'"
           currentDate=$(printf '%(%m-%d-%Y %H:%M %p)T\n' -1)
+          [[ $BUILD_STATUS = "success" ]] && themeColor="2ea44f" || themeColor="cb2431"
           teamsBody=$(jq . teams.json)
           teamsBody=${teamsBody//<%BUILD_STATUS%>/$BUILD_STATUS } 
           teamsBody=${teamsBody//<%DATE%>/$currentDate } 
           teamsBody=${teamsBody//<%GITHUB_WORKFLOW%>/$GITHUB_WORKFLOW } 
           teamsBody=${teamsBody//<%GITHUB_RUN_ID%>/$GITHUB_RUN_ID }
           teamsBody=${teamsBody//<%GITHUB_RUN_NUMBER%>/$GITHUB_RUN_NUMBER }
-          teamsBody=${teamsBody//<%GITHUB_REPOSITORY%>/$GITHUB_REPOSTIORY } 
-          teamsBody=${teamsBody//<%BUILD_URL%>/$BUILD_URL } 
+          teamsBody=${teamsBody//<%BUILD_URL%>/$BUILD_URL }
+          teamsBody=${teamsBody//<%THEME_COLOR%>/$themeColor }
           echo $teamsBody
           
           curl -X POST -d "$teamsBody" ${{ secrets.TEAMS_URL }}
