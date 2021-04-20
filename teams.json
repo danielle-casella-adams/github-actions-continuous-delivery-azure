@@ -3,45 +3,44 @@
 	"@context": "https://schema.org/extensions",
 	"themeColor": "0078D7",
 	"title": "Windows Actions Runner Build Status",
-    "summary": "Build Status"
+	"summary": "Build Status",
 	"sections": [
-		{
+		{ 
 			"activityTitle": "Build <%BUILD_STATUS%>",
-			"activitySubtitle": "<%DATE%>",
+	    	"activitySubtitle": "<%DATE%>",
 			
-			"facts": [
-				{
-					"name": "Workflow:",
-					"value": "<%GITHUB_WORKFLOW%>"
-				},
-				{
-					"name": "Run #:",
-					"value": "<%GITHUB_RUN_NUMBER%>"
-				}
-			],
-            "text": "I came from GitHub Actions"
-		}
+        	"facts": [
+            	{
+                	"name": "Workflow:",
+                	"value": "<%GITHUB_WORKFLOW%>"
+            	},
+            	{
+                	"name": "Run #:",
+                	"value": "<%GITHUB_RUN_NUMBER%>"
+            	}],
+        	"text": "I came from GitHub Actions"
+    	}
 	],
 	"potentialAction": [
+        {
+            "@type": "OpenUri",
+            "name": "View Build Log",
+            "targets": [
                 {
-                    "@type": "OpenUri",
-                    "name": "View Build Log",
-                    "targets": [
-                        {
-                            "os": "default",
-                            "uri": "https://github.com/bdaim-bc-swat/virtual-environments/runs/<%GITHUB_RUN_NUMBER>?check_suite-focus=true"
-                        }
-                    ]
-                },
-                {
-                    "@type": "OpenUri",
-                    "name": "View Installed Software",
-                    "targets": [
-                        {
-                            "os": "default",
-                            "uri": "https://github.com/bdaim-bc-swat/virtual-environments/blob/main/images/win/Windows2019-Readme.md"
-                        }
-                    ]
+                    "os": "default",
+                    "uri": "https://github.com/<%GITHUB_REPOSITORY%>/runs/<%GITHUB_RUN_NUMBER>?check_suite-focus=true"
                 }
+            ]
+        },
+        {
+            "@type": "OpenUri",
+            "name": "View Installed Software",
+            "targets": [
+                {
+                    "os": "default",
+                    "uri": "https://github.com/bdaim-bc-swat/virtual-environments/blob/main/images/win/Windows2019-Readme.md"
+                }
+            ]
+        }
 	]
 }
