@@ -1,7 +1,7 @@
 {
 	"@type": "MessageCard",
 	"@context": "https://schema.org/extensions",
-	"themeColor": "0078D7",
+	"themeColor": "<%THEME_COLOR%>",
 	"title": "Windows Actions Runner Build Status",
 	"summary": "Build Status",
 	"sections": [
