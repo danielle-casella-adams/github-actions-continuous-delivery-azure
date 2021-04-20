@@ -44,15 +44,12 @@ jobs:
 
       - name: Post to Teams
         run: |
+          echo "'$BUILD_STATUS' '$GITHUB_WORKFLOW' '$GITHUB_RUN_NUMBER' '$GITHUB_REPOSITORY' 'GITHUB_RUN_ID'"
           currentDate=$(printf '%(%m-%d-%Y %H:%M %p)T\n' -1)
           teamsBody=$(jq . teams.json)
-          echo "Original Body: $teamsBody"
           teamsBody=${teamsBody//<%BUILD_STATUS%>/$BUILD_STATUS } 
-          echo "First Replacement: $teamsBody"
           teamsBody=${teamsBody//<%DATE%>/$currentDate } 
-          echo "Second Replacement: $teamsBody"
           teamsBody=${teamsBody//<%GITHUB_WORKFLOW%>/$GITHUB_WORKFLOW } 
-          echo "Third Replacement: $teamsBody"
           teamsBody=${teamsBody//<%GITHUB_RUN_NUMBER%>/$GITHUB_RUN_NUMBER } 
           teamsBody=${teamsBody//<%GITHUB_REPOSITORY%>/$GITHUB_REPOSITORY } 
           echo $teamsBody
@@ -60,8 +57,9 @@ jobs:
           curl -X POST -d "$teamsBody" ${{ secrets.TEAMS_URL }}
         env:
           BUILD_STATUS: ${{ job.status }}
-          GITHUB_WORKFLOW: ${{ env.GITHUB_WORKFLOW }}
-          GITHUB_RUN_NUMBER: ${{ env.GITHUB_RUN_NUMBER }}
+          GITHUB_WORKFLOW: ${{ github.workflow }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_RUN_ID: ${{ github.run_id }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           
           
