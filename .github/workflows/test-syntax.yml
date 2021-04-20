@@ -46,13 +46,14 @@ jobs:
         run: |
           echo "'$BUILD_STATUS' '$GITHUB_WORKFLOW' '$GITHUB_RUN_NUMBER' '$GITHUB_REPOSITORY' '$GITHUB_RUN_ID'"
           currentDate=$(printf '%(%m-%d-%Y %H:%M %p)T\n' -1)
+          repo=$(echo $GITHUB_REPOSTIORY | xargs)
           teamsBody=$(jq . teams.json)
           teamsBody=${teamsBody//<%BUILD_STATUS%>/$BUILD_STATUS } 
           teamsBody=${teamsBody//<%DATE%>/$currentDate } 
           teamsBody=${teamsBody//<%GITHUB_WORKFLOW%>/$GITHUB_WORKFLOW } 
           teamsBody=${teamsBody//<%GITHUB_RUN_ID%>/$GITHUB_RUN_ID }
           teamsBody=${teamsBody//<%GITHUB_RUN_NUMBER%>/$GITHUB_RUN_NUMBER }
-          teamsBody=${teamsBody//<%GITHUB_REPOSITORY%>/$GITHUB_REPOSITORY } 
+          teamsBody=${teamsBody//<%GITHUB_REPOSITORY%>/$repo } 
           echo $teamsBody
           
           curl -X POST -d "$teamsBody" ${{ secrets.TEAMS_URL }}
