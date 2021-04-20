@@ -28,7 +28,7 @@
             "targets": [
                 {
                     "os": "default",
-                    "uri": "https://github.com/<%GITHUB_REPOSITORY%>/runs/<%GITHUB_RUN_ID%>?check_suite-focus=true"
+                    "uri": "<%BUILD_URL%>"
                 }
             ]
         },
